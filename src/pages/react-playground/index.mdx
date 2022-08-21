@@ -23,7 +23,7 @@ import { Picture } from '@astrojs/image/components';
 ##  Setting up the sandbox 
 We run everything in the browser, so we need to load the two React scripts: `react.js` and `react-dom.js`.
 
-```HTML
+```html
 <!-- Load React. -->
 <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
 <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
@@ -33,12 +33,12 @@ We run everything in the browser, so we need to load the two React scripts: `rea
 We also want JSX, so we need Babel to transpile JSX to plain JavaScript. Usually, we use Babel at build time, but here we 
 need it at runtime, so we need to use the standalone version.
 
-```HTML
+```html
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 ```
 
 When we need to traspile code, we use Babel like this:
-```JavaScript
+```js
 try {
     let result = Babel.transform(code, { presets: ["env", "es2015", "react"] }).code;
     Function(result)(window);
@@ -50,7 +50,7 @@ catch(err){
 Every time we change the code we want to evaluate, we need to get rid of the current evaluation result (all DOM nodes created by the current evaluation).
 There are several ways to do this, but I prefer to put the code evaluation piece in a separate iframe, `sandbox.html`
 
-```HTML
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,7 +104,7 @@ The part I want to highlight here is the code evaluation( calling `evaluateCode(
 * when the page is loaded
 * each time the user changes the code in the editor
 
-```JavaScript
+```js
 const editor = new EditorView({
   state: EditorState.create({
     extensions: [
@@ -134,7 +134,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 ```
 
 The evaluation function simply sends the code to the sandbox iframe:
-```JavaScript
+```js
 const evaluateCode = (code) => {
   console.clear();
   try{
@@ -152,7 +152,7 @@ const evaluateCode = (code) => {
 Inside `index.html` we load the `editor.bundle.js` which will create the code editor and also the sandbox iframe.
 Note that we need to set some properties to allow the iframe to execute the code we send to it.
 
-```HTML
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>

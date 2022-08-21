@@ -21,7 +21,7 @@ even for the simple fact that you can get rid of a few 3rd party kilobytes of Ja
 
 ## A simple example
 
-```JavaScript
+```js
 // the only required parameter is the URL
 fetch('http://api.open-notify.org/astros.json') 
     .then(response => {
@@ -42,7 +42,7 @@ Since the Promise is resolved/rejected at a later time, asynchronously, we need 
 * `catch` is called when the promise fails
 
 Or if you prefer async / await, you can use that too:
-```JavaScript
+```js
 try {
     const response = await fetch(url) 
     // do something with the response
@@ -59,7 +59,7 @@ The response of a fetch() request is a stream, so depending on the type of data 
 
 For example, if the server response is JSON, you need to call `response.json()` that returns a Promise that resolves with 
 the result of parsing the body text as JSON.
-```JavaScript
+```js
 fetch('http://api.open-notify.org/astros.json') 
     .then(response => response.json() // or .text(), .blob(), .arrayBuffer(), .formData()
     .then(data => {
@@ -71,7 +71,7 @@ fetch('http://api.open-notify.org/astros.json')
 ```
 
 We can use fetch() to load all kind of data, like image files, audio or video files:
-```JavaScript
+```js
 fetch('/image.jpg')
     .then(response => response.blob()) // returns promise
     .then(blob => {
@@ -89,7 +89,7 @@ Now here is something unexpected. Here is it, straight from [MDN](https://develo
 
 I have no idea why it's working like this, none of the alternatives work this way, but
 this happens when you fetch an URL and the server responds with a [4xx or 5xx error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status):
-```JavaScript
+```js
 fetch(url) 
     .then(response => {
         // This code is executed even for 4xx-5xx errors!
@@ -102,7 +102,7 @@ fetch(url)
 
 We need to detect these errors and handle them. The `response` has an `ok` flag that is set to false 
 when the server responds with an error, so we can use that flag:
-```JavaScript
+```js
 fetch(url) 
     .then(response => { 
         if(!response.ok) { 
@@ -118,7 +118,7 @@ fetch(url)
     });
 ```
 We can extract error related code in a separate function so we can use it with multiple fetch calls:
-```JavaScript
+```js
 function checkForErrors(response) {
     if(!response.ok) { // 
         const error = new Error(response.statusText || 'Fetch failed') 
@@ -139,14 +139,14 @@ fetch(url)
 ## Advanced usage 
 
 Besides the URL, fetch accepts an object with different options
-```JavaScript
+```js
 fetch(url, options) 
     .then(response => {})
     .catch(error => {});
 ```
 
 Here they are (those with * in front are the default values)
-```JavaScript
+```js
 {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
@@ -161,7 +161,7 @@ Here they are (those with * in front are the default values)
   }
 ```
 This means the following are the same:
-```JavaScript
+```js
 fetch(url) 
     .then(response => {})
     .catch(error => {});
@@ -186,7 +186,7 @@ Let's dive into some of the options and see how we can use them.
 ### method option
 By default fetch() will make a [GET request](https://www.restapitutorial.com/lessons/httpmethods.html). 
 If you want to do a POST you'll need to set the method option to POST. Usually, you'll also send some data:
-```JavaScript
+```js
 const data = { user: 'Jon', city: 'London'}
 
 fetch(url, 
@@ -204,7 +204,7 @@ fetch(url,
 
 ### mode option
 The fetch mode can be cors, no-cors, or same-time.
-```JavaScript
+```js
 fetch(url, 
     {  
        mode: 'cors' 
@@ -224,7 +224,7 @@ you need to be logged in with your Google credentials.
 
 You are asked to log in once, and any subsequent fetch requests made by your browsers are allowed if 
 your requests include the credentials.
-```JavaScript
+```js
 fetch(url, 
     {  
        credentials: 'include' 
@@ -243,7 +243,7 @@ request will wait forever for the server to respond.
 
 Luckily we can implement this by wrapping the fetch in a Promise that we can resolve or reject:
 
-```JavaScript
+```js
 // create a wrapper
 function fetchTimeout(url, options, timeout = 5000)
     // return the promise
@@ -285,7 +285,7 @@ the other one? You don't want to see it anymore so you want to cancel it. How yo
 
 Well, you can use [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController),
  a shiny new experimental technology! (FYI It's already available in all major browsers)
-```JavaScript
+```js
 // create a controller
 const controller = new AbortController();
 const { signal } = controller;
@@ -295,7 +295,7 @@ controller.abort();
 ```
 
 Here is how you can use it with fetch, you pass the `signal` as an option:
-```JavaScript
+```js
 const controller = new AbortController();
 const { signal } = controller;
 
@@ -327,7 +327,7 @@ It took a long time for the Abort API to be accepted:
 I would prefer the object returned by fetch() to have the abort method.
 Since is best to keep the abort details hidden we would need to create a wrapper like this:
 
-```JavaScript
+```js
 function abortableFetch(request, opts) {
   const controller = new AbortController();
   const signal = controller.signal;
@@ -340,7 +340,7 @@ function abortableFetch(request, opts) {
 ```
 Because the above solution breaks the interface of the object returned by fetch(), we could 
 add the abort() on that object (e.g. as proposed by the group that lost)
-```JavaScript
+```js
 function abortableFetch(url, options) {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -357,7 +357,7 @@ function abortableFetch(url, options) {
 }
 ```
 This allows us to combine the timeout and cancel functionality in a single wrapper:
-```JavaScript
+```js
 
 /**
  * Fetch that can timeout and is cancellable
@@ -400,7 +400,7 @@ Unlike `response.json()` and other methods, `response.body` gives full control o
 the reading process, and we can see how much data is received at any moment.
 
 
-```JavaScript
+```js
 const progressIndicator = (length, total) => {...}
 
 fetch('https://reqres.in/api/users/1') 

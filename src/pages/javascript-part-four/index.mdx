@@ -19,7 +19,7 @@ We have seen bindings, but there are also classes, functions, methods, members, 
 In JavaScript, a name must start with a letter, optionally followed by one or more letters, digits, or underscore.
 $ (dollar sign) and _ (underscore) can be used instead of a letter as a name prefix.
 
-```JavaScript
+```js
 let name = "Jon Snow";
 
 // binding that starts with a letter followed by a digit
@@ -32,7 +32,7 @@ const _1stOne = "firstOne";
 const $2nd = "second";
 ```
 So the only constraint is that a name can't start with a digit, you will get an error if you try to do this:
-```JavaScript
+```js
 // This doesn't work
 const 1st = "first";
 const 2nd = "second";
@@ -42,21 +42,21 @@ By convention, the name of all members, bindings, functions starts in lower case
 Class names start with upper case.
 
 *camelCaseNotation* is used for names composed from several words of all other names:
-```JavaScript
+```js
 const nameOfTheGame = "football";
 const isDone = false;
 const numberOfBottles = 3;
 ```
 
 JavaScript is case sensitive, this means *name*, *Name* and *NAME* are three different things:
-```JavaScript
+```js
 const name = "Jon";
 const Name = "Snow";
 const NAME = "JON";
 ```
 
 A special case is program level constants are entirely upper case and we separate words with underscores:
-```JavaScript
+```js
 const DATABASE_IP = '192.34.55.11';
 const LEVEL_WARNING = "LEVEL_WARNING";
 ```
@@ -72,7 +72,7 @@ All Sudoku boards have 81 squares, so that's a program-level constant.
 ## Keywords
 There are some words with special meanings in JavaScript. Like *const* or *let*. These words are reserved and we can't use them
 to name our abstractions.
-```JavaScript
+```js
 // This doesn't work
 const const = "const";
 let let = "let";

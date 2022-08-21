@@ -27,7 +27,7 @@ than identical code that's not strict mode.
 - Prohibits some syntax likely to be defined in the future.
 
 To use the strict mode, we need to add the following as the first line in the code.
-```JavaScript
+```js
 'use strict'; 
 ```
 
@@ -37,7 +37,7 @@ To use the strict mode, we need to add the following as the first line in the co
 Comments are parts of the code that are ignored by the JavaScript interpreter. A program works the same if the comments are removed.
 We write comments for our future selves and our teammates. We add comments for parts of code that are complicated and are complicated for a good reason.
 
-```JavaScript
+```js
 'use strict';            
 
 /*
@@ -61,7 +61,7 @@ the Developer Tools Console.
 
 > Ironically console is not part of the JavaScript specification but is available on all modern browsers and Node.js
 
-```JavaScript
+```js
 'use strict';     
 
 // clears the console
@@ -79,7 +79,7 @@ console.error("Task failed successfully");
 There are many more [console methods](https://developer.mozilla.org/en-US/docs/Web/API/console), but these are the most used.
 
 When console methods are not enough for debugging, you can use the `debugger` statement. The interpreter will stop at that line of code:
-```JavaScript
+```js
 console.log("Before debugger");
 
 debugger;
@@ -111,7 +111,7 @@ Here are some examples:
 
 
 Let's see how you can make values:
-```JavaScript
+```js
 'use strict';
 
 // Need a number? Just type it and it will be summoned            
@@ -146,12 +146,12 @@ To *summon* a value, you just have to type it.
 ## Bindings
 Having values is not enough. We need to give them a meaning, we need to name them. For example, a `7` can have different meanings, 
 depending on how we use it in a piece of code, like the day of the week, the maximum of a series of numbers, the sum, the position in a list, and so on.
-```JavaScript
+```js
 // what is this 7?
 7
 ```
 Another problem we have with values is that we can't use a previous value because we have no way of grasping it. 
-```JavaScript
+```js
 // sum 
 7 + 3
 
@@ -160,13 +160,13 @@ Another problem we have with values is that we can't use a previous value becaus
 ```
 To solve all these issues we can create *bindings*. A binding is the result of binding a name to a value.
 You can bind a value to a name using `const` or `let`. 
-```JavaScript
+```js
 const language = 'JavaScript';
 
 let sum = 7 + 3;
 ```
 After that, you can use the binding name to get the bound value.
-```JavaScript
+```js
 const language = 'JavaScript';
 console.log(language); // JavaScript
 
@@ -184,7 +184,7 @@ The same value can be bound to several names, meaning the same value can be gras
 by default, and "let" only if you need to change the binding.
 
 Let's see how we create some bindings:
-```JavaScript
+```js
 // Previously we had to repeat the 7 + 3 operation when we printed the result,
 // by binding the result of 7 + 3 to 'sum', we can print it using the binding
 const sum = 7 + 3;
@@ -216,7 +216,7 @@ console.log("born, missing, died :", born, missing, died);
 ```
 
 Understanding how bindings work in JavaScript is very important. Let's look at a simple example and see what's going on:
-```JavaScript
+```js
 'use strict';   
 
 let x = 100;

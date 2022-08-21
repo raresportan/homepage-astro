@@ -2,55 +2,100 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Waves from "../components/Waves.astro";
+import Newsletter from "../components/Newsletter.astro";
+import TwitterShare from "../components/TwitterShare.astro";
 
 export interface Props {
 	content: {
 		title: string;
 		description: string;
-		pubDate?: string;
+		date?: string;
 		updatedDate?: string;
 		heroImage?: string;
+		keywords?: Array<string>;
+		minutesRead?: string;
 	};
 }
 
+export const formatDate = (dateString) => {
+	if (!dateString) {
+		return "";
+	}
+	const options = { year: "numeric", month: "long", day: "2-digit" };
+	const date = new Date(dateString);
+	try {
+		return date.toLocaleDateString("default", options);
+	} catch (err) {
+		// handle IE 11
+		return date.toLocaleDateString();
+	}
+};
+
 const {
-	content: { title, description, pubDate, updatedDate, heroImage },
+	content: { title, description, date, updatedDate, keywords, minutesRead },
 } = Astro.props as Props;
+
+console.log("minutesRead", minutesRead);
 ---
 
 <html>
 	<head>
+		<link href="./prism-dark.css" rel="stylesheet" />
 		<BaseHead title={title} description={description} />
-		<style>
-			.title {
-				font-size: 2em;
-				margin: 0.25em 0 0;
-			}
-			hr {
-  				border-top: 1px solid #DDD;
-				margin: 1rem 0;
-			}
-		</style>
 	</head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				{heroImage && (
-					<img
-						width={720}
-						height={360}
-						src={heroImage}
-						alt=""
-					/>
-				)}
-				<h1 class="title">{title}</h1>
-				{pubDate && <time>{pubDate}</time>}
-				{updatedDate && <div>Last updated on <time>{updatedDate}</time></div>}
-				<hr/>
+	<body class:list={["light"]}>
+		<Header title={title} isOnHomePage={false} />
+		<main id="main" role="main">
+			<article class="post flow centered-content">
+				<header>
+					<h1 class="title">{title}</h1>
+					{
+						date && (
+							<time>
+								{formatDate(date)}{" "}
+								{minutesRead && (
+									<>
+										{" "}
+										• <em>{minutesRead}</em>
+									</>
+								)}
+								{keywords && (
+									<>
+										{" "}
+										• <em>{keywords.join(" ")}</em>
+									</>
+								)}
+							</time>
+						)
+					}
+					{
+						updatedDate && (
+							<div>
+								Last updated on <time>{updatedDate}</time>
+							</div>
+						)
+					}
+				</header>
 				<slot />
+
+				<TwitterShare title={title} />
 			</article>
+
+			<section class="post-footer">
+				<Waves
+					id="gentle-wave-login"
+					className="footer"
+					wave1X="0"
+					wave2X="48"
+					wave3X="120"
+					wave4X="68"
+				/>
+				<div class="centered-content">
+					<Newsletter />
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>

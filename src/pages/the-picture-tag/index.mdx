@@ -30,7 +30,7 @@ is &lt;image&gt; tag, but it turns out some browsers handle &lt;image&gt; in the
 you meant to use &lt;img&gt;. Thank you for trusting me.
 
 In the end, the &lt;picture&gt; tag is chosen. Here is an example, in its full glory:
-```HTML
+```html
 <picture>
   <source 
     type="image/avif"
@@ -80,7 +80,7 @@ As you can see, the picture tag is a bit complex, but we'll try to make it more 
 
 The simplest usage of the picture tag would be this, but it does nothing since there is no alternative source to choose from. 
 "medium.jpg" is always used.
-```HTML
+```html
 <picture>
   <img src="dog/medium.jpg" 
     alt="My pug, Bobby">
@@ -92,7 +92,7 @@ The simplest usage of the picture tag would be this, but it does nothing since t
 To make the picture tag useful, you need at least one alternative source. In the following example, we set
 as an alternative source, an AVIF image. AVIF is an image type that reduces the image size considerably but is not supported 
 by most of the browsers yet. 
-```HTML
+```html
 <picture>
   <source 
     type="image/avif"
@@ -106,7 +106,7 @@ will still work in ALL browsers! You cannot do this with img tag.*
 
 ### 2. Image size according to screen size
 Another useful usage of the picture tag is to provide multiple sizes of the image:
-```HTML
+```html
 <picture>
   <source 
     type="image/jpg"
@@ -119,7 +119,7 @@ Another useful usage of the picture tag is to provide multiple sizes of the imag
 ```
 Here, using the *srcset*, we provide three different images, each one of a different size. Note that beside each image URL,
 we also supply a _width descriptor_:
-```HTML
+```html
 dog/medium.jpg  640w
 ```
 The _width descriptor_ is the actual image width, the image's real size. Instead of "px" (pixels), we need to use "w." Why?
@@ -132,7 +132,7 @@ the retina screen requires a much larger image.
 
 You can use the picture tag with the _x descriptor_ to handle different resolutions. In this example, _large.jpg_ 
 is used on retina displays (because we add "2x" next to it) and _medium.jpg_ on regular displays.
-```HTML
+```html
 <picture>
   <source 
     type="image/jpg"
@@ -148,7 +148,7 @@ So far, our picture settings considered that the image is displayed full-screen 
 calculations are done using the screen width. But what if we need to render the image in a spot that is not full-screen width? Like only 50% of the screen width, or 300px?
 
 Let's come back to this example:
-```HTML
+```html
 <picture>
   <source 
     type="image/jpg"
@@ -166,7 +166,7 @@ The problem is that when we display the image on half of the screen we still dow
 we download the 1280px version instead of the 640px version. 
 
 Can we fix that? Yes, we can fix it using "sizes" attributes:
-```HTML
+```html
 <picture>
   <source 
     srcset="dog/large.jpg  1280w, 
@@ -192,7 +192,7 @@ Well, I try to zoom it in one of the two modes - because it doesn't fit.
 
 For example, let's say that by default we show a landscape image of a dog (used on desktop and landscape orientation on phones),
 but when we use the portrait orientation on the phone, we display a close caption of the dog, a portrait image:
-```HTML
+```html
 <picture>
   <source 
     media="(max-width: 800px)" srcset="dog/portrait.jpg">     
@@ -211,7 +211,7 @@ With the above use cases, we saw how the picture settings can be used to do one 
 But nothing stops us from using everything together. The only thing you should not do is to use *media* and *sizes*
 attributes together because they allow you to do similar things.
 
-```HTML
+```html
 <picture>
   <source 
     type="image/avif"
@@ -249,7 +249,7 @@ Here is how this works:
 ## One more thing: Using picture with &lt;figure&gt;
 As you can use &lt;figure&gt; and &lt;figcaption&gt; with image, you can use them with the picture tag - in case you need to display a caption
 for the image:
-```HTML
+```html
 <figure>
   <picture>
     <source 

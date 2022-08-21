@@ -33,7 +33,7 @@ npm i @codemirror/basic-setup @codemirror/lang-javascript
 ```
 
 Now we can create the main editor file,`editor.js`, adding the following:
-```JavaScript
+```js
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 import {javascript} from "@codemirror/lang-javascript"
 
@@ -46,7 +46,7 @@ let editor = new EditorView({
 ```
 
 Let's create a `styles.css`:
-```CSS
+```css
 html, 
 body {
     margin: 0;
@@ -58,7 +58,7 @@ body {
 ```
 
 Finally let's create an HTML file, `index.html` that uses the script bundle and the CSS file:
-```HTML
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +88,7 @@ We need to install Rollup:
 npm i rollup @rollup/plugin-node-resolve
 ```
 Now let's create a Rollup configuration file, called `rollup.config.js`:
-```JavaScript
+```js
 import {nodeResolve} from "@rollup/plugin-node-resolve"
 export default {
   input: "./editor.js",
@@ -101,7 +101,7 @@ export default {
 ```
 To make things simple edit the `package.json` and add a `"start": "rollup -c"` script.
 `package.json` should be something like this:
-```JSON
+```json
 {
   "name": "codemirror6",
   "version": "1.0.0",
@@ -139,7 +139,7 @@ import { Picture } from '@astrojs/image/components';
 
 
 If we look at the source code, we can see that the editor was added in the body:
-```HTML
+```html
 <div class="cm-editor cm-wrap ͼ1 ͼ2 ͼ4">
     <div aria-live="polite" style="position: absolute; top: -10000px;"></div>
     <div tabindex="-1" class="cm-scroller">
@@ -171,7 +171,7 @@ CodeMirror is a collection of modules that provide a full-featured text and code
 This means that you can pick and choose which features you need, but setting up an editor requires you to put together a bunch of pieces.
 
 Let's go back to the `editor.js` source to see what is happening there:
-```JavaScript
+```js
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 import {javascript} from "@codemirror/lang-javascript"
 
@@ -206,7 +206,7 @@ npm i @codemirror/lang-json
 When I'm writing this CodeMirror supports CSS, C++, HTML, Java, JavaScript, JSON, Markdown, Python, Rust, and XML.
 
 Then you import and use the package,e.g. here is how to use the `lang-html`:
-```JavaScript
+```js
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 import {html} from "@codemirror/lang-html"
 
@@ -222,7 +222,7 @@ let editor = new EditorView({
 
 To set a start value for the editor you just need to set the state's `doc` property to the value.
 For example, if the initial editor value is:
-```HTML
+```html
 <html lang="en">
 <body>
     <h1>CodeMirror 6</h1>
@@ -231,7 +231,7 @@ For example, if the initial editor value is:
 </html>
 ```
 Then we set it as `doc` value:
-```JavaScript
+```js
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 import {html} from "@codemirror/lang-html"
 
@@ -258,7 +258,7 @@ let editor = new EditorView({
 
 ### Reading and setting the document's text
 To read the current text displayed by the editor you do:
-```JavaScript
+```js
 const currentValue = editor.state.doc.toString();
 
 // <html lang="en">
@@ -273,7 +273,7 @@ const currentValue = editor.state.doc.toString();
 You can change the value in multiple ways by dispatching changes. 
 *DO NOT change the doc directly.*
 * Inserting text
-```JavaScript
+```js
 editor.dispatch({
   changes: {from: 0, insert: "<!DOCTYPE html>\n"}
 })
@@ -287,7 +287,7 @@ editor.dispatch({
 // </html>
 ```
 * Replacing text
-```JavaScript
+```js
 const currentValue = editor.state.doc.toString();
 const startPosition = currentValue.indexOf("editor.bundle.js");
 const endPosition = startPosition + "editor.bundle.js".length;
@@ -308,7 +308,7 @@ editor.dispatch({
 // </html>
 ```
 So to replace everything you just need to get the current text length:
-```JavaScript
+```js
 const currentValue = editor.state.doc.toString();
 const endPosition = currentValue.length;
 
@@ -324,7 +324,7 @@ You can dispatch multiple changes at once if you need that, `changes` must be an
 ### Listen for changes
 Usually, you want to listen for change and do something with the new code, for example, to reinterpret/evaluate the code. This is 
 done by adding a `updateListener` to the editor view like this:
- ```JavaScript
+ ```js
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 import {html} from "@codemirror/lang-html"
 
@@ -343,7 +343,7 @@ let editor = new EditorView({
 })
 ```
 Of course, if you don't want to do a lot of processing each time a key is pressed you need to use a timeout there:
-```JavaScript
+```js
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 import {html} from "@codemirror/lang-html"
 
@@ -376,7 +376,7 @@ npm i @codemirror/theme-one-dark
 ```
 
 You can use a theme just like anything else: you import it and use it as an extension:
-```JavaScript
+```js
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 import {html} from "@codemirror/lang-html"
 import { oneDarkTheme } from "@codemirror/theme-one-dark";
@@ -402,7 +402,7 @@ let editor = new EditorView({
 
 As I've said you can use your theme. CodeMirror 6 uses CSS-in-JS.
 
-```JavaScript
+```js
 let myTheme = EditorView.theme({
   "&": {
     color: "white",
@@ -426,7 +426,7 @@ let myTheme = EditorView.theme({
 ```
 If you don't want to provide styles for everything, you can extend the base theme and overwrite only parts of it. Here is an example 
 that changes the editor font family and size:
-```JavaScript
+```js
 import {EditorView} from "@codemirror/view"
 
 const myTheme = EditorView.baseTheme({
@@ -443,7 +443,7 @@ const myTheme = EditorView.baseTheme({
 The only missing piece is a code evaluator, which for JavaScript is easy to do (since this runs in the browser).
 Just add some `console.log()` to see the results of the code execution on the browser's DevTools console.
 
-```Javascript
+```js
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 import {javascript} from "@codemirror/lang-javascript"
 

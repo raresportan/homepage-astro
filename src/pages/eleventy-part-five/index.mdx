@@ -29,7 +29,7 @@ And now we'll see how to bundle runtime JavaScript.
 Assuming you have the JavaScript ready to be used (transpiled, minified, etc), you can tell Eleventy to copy the JavaScript files 
 in the build. Let's say we keep all our JavaScript files inside `src/assets/scripts`. Then we add the following in the `.eleventy.js`:
 
-```JavaScript
+```js
 module.exports = config => {
   ...
   // Copy JavaScript files
@@ -38,7 +38,7 @@ module.exports = config => {
 };
 ```
 That's it. You can use them in HTML like this:
-```HTML
+```html
 <script src="{{ '/assets/scripts/main.js' | url }}" defer></script>
 ```
 
@@ -59,7 +59,7 @@ src/
     main.js
 ```
 We can use main.js like this inside a ".njk" file:
-```nunjucks
+```html
 {% set js %}
   {% include "main.js" %}
 {% endset %}
@@ -68,7 +68,7 @@ We can use main.js like this inside a ".njk" file:
 </script>
 ```
 The content of the script will be inlined and will look like this:
-```HTML
+```html
 <script>
 console.log('main.js source');
 </script>
@@ -83,7 +83,7 @@ First, we need to install a minifier, like `terser`:
 npm install terser
 ```
 Then, create the filter in `./src/filters.js`:
-```JavaScript
+```js
 const { minify } = require("terser");
 
 module.exports = {  
@@ -99,7 +99,7 @@ module.exports = {
 }
 ```
 Add the filters to the `.eleventy.js` configuration file:
-```JavaScript
+```js
 const filters = require('./src/filters.js');
 
 module.exports = config => {
@@ -110,7 +110,7 @@ module.exports = config => {
 };
 ```
 The finally we can use it:
-```nunjucks
+```html
 {% set js %}
   {% include "main.js" %}
 {% endset %}
@@ -144,7 +144,7 @@ is used by Eleventy to get the template's content.
 We need to create a `scripts.11ty.js` file that used webpack to transpile and minify our JavaScript.
 See [Max Böck's Eleventastic starter](https://github.com/maxboeck/eleventastic/blob/master/src/assets/scripts/__scripts.11ty.js) and 
 [Mike Riethmuller's Supermaya starter](https://github.com/MadeByMike/supermaya/blob/master/site/utils/compile-webpack.js)
-```JavaScript
+```js
 // This file handles the JS build.
 // It will run webpack with babel over all JS defined in the main entry file.
 
@@ -248,7 +248,7 @@ We don't need to understand all the details, the only thing we need to know is t
 so we should have a `main.js` that can import other scripts if necessary.
 
 So for example if we have several JavaScript files, we need to import them all in main.js:
-```JavaScript
+```js
 import 'eleventy-plugin-share-highlight/share-highlight'
 ...
 
@@ -259,7 +259,7 @@ import './lazyload'
 ```
 As you can see, we import both packages like 'eleventy-plugin-share-highlight/share-highlight' and our code from 'navigation' and 'lazyload'.
 Now, all we have to do is to use `main.js`(src/assets/scripts/main.js) in a template:
-```HTML
+```html
 <script type="text/javascript" src="{{ '/assets/scripts/main.js' | url }}"></script>
 ```
 

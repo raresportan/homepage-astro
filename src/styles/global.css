@@ -1,67 +1,205 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-body {
-	font-family: Verdana, sans-serif;
-	margin: auto;
-	padding: 20px;
-	max-width: 65ch;
-	text-align: left;
-	background-color: #fff;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	line-height: 1.5;
-	color: #444;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
+
+/* Remove default margin */
+body,
 h1,
 h2,
 h3,
 h4,
-h5,
-h6,
-strong,
-b {
-	color: #222;
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
 }
-a {
-	color: #3273dc;
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
 }
-nav a {
-	margin-right: 10px;
+
+/* Set core root defaults */
+/* html:focus-within {
+  scroll-behavior: smooth;
+} */
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
 }
-textarea {
-	width: 100%;
-	font-size: 16px;
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
 }
-input {
-	font-size: 16px;
-}
-content {
-	line-height: 1.6;
-}
-table {
-	width: 100%;
-}
-img {
+
+/* Make images easier to work with */
+img,
+picture {
 	max-width: 100%;
-	height: auto;
+	display: block;
 }
-code {
-	padding: 2px 5px;
-	background-color: #f2f2f2;
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
 }
-pre {
-	padding: 1rem;
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
-pre > code {
-	all: unset;
+
+:root {
+	--size-300: 0.833rem;
+	--size-400: 1rem;
+	--size-500: 1.2rem;
+	--size-600: 1.44rem;
+	--size-700: 1.728rem;
+	--size-800: 2.074rem;
+	--size-900: 2.488rem;
 }
-blockquote {
-	border: 1px solid #999;
-	color: #222;
-	padding: 2px 0px 2px 20px;
-	margin: 0px;
+
+body {
+	line-height: 1.5;
+	padding: 2rem 0;
+}
+
+a:not([class]) {
+	color: currentColor;
+}
+
+:focus {
+	outline: 2px solid;
+	outline-offset: 0.25rem;
+}
+
+main:focus {
+	outline: none;
+}
+
+[href]:hover {
+	text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	line-height: 1.3;
+}
+
+h1,
+h2 {
+	font-weight: 900;
+}
+
+h1 {
+	font-size: var(--size-700);
+}
+
+h2 {
+	font-size: var(--size-600);
+}
+
+h3 {
+	font-size: var(--size-600);
+}
+
+img {
+	max-width: min(55rem, 100%);
+}
+
+figcaption {
+	font-size: var(--size-300);
+
 	font-style: italic;
+	margin-top: 1rem;
+}
+
+
+li {
+	padding-bottom: 1rem;
+}
+
+::selection {
+	color: #fff;
+	background: rgba(0, 0, 0, 0.99);
+}
+
+.flow>*+* {
+	margin-top: var(--flow-space, 1em);
+}
+
+.post {
+	--flow-space: var(--size-700);
+}
+
+.post time {
+	--flow-space: var(--size-400);
+	display: block;
+}
+
+.post :is(h2, h3) {
+	--flow-space: var(--size-900);
+}
+
+.post :is(h2, h3)+* {
+	--flow-space: var(--size-400);
+}
+
+.post figure,
+.post figure+* {
+	--flow-space: var(--size-900);
+}
+
+@media (min-width: 45em) {
+	h1 {
+		font-size: var(--size-900);
+	}
+
+	h2 {
+		font-size: var(--size-700);
+	}
+
+	p,
+	li {
+		font-size: var(--size-500);
+	}
+
+	code[class*="language-"],
+	pre[class*="language-"] {
+		font-size: var(--size-400);
+	}
+
+	figcaption {
+		font-size: var(--size-400);
+	}
+
+	.post time {
+		font-size: var(--size-400);
+	}
 }

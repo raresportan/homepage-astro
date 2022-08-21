@@ -23,7 +23,7 @@ At that point, the girl decides if there are people in space, she'll write their
   *There was a problem, the promise was not fulfilled*, father was not able to find out who's in space, so the girl will ask mom. 
 
 Here is how the story is implemented in code:
-```JavaScript
+```js
 function daddyMakesPromise () {
     // makes a promise
     return new Promise( (resolve, reject) => {
@@ -67,7 +67,7 @@ Promises are supposed to help to make the code more clear, specifically to solve
 *callback hell* problem.
 
 Before Promises, we had to write code like this:
-```JavaScript
+```js
 function a(callback) {
     // do a XMLHttpRequest call
     const result = ...;
@@ -96,7 +96,7 @@ a(function(resultsFromA){
 ```
 
 If we use promise, the code is much clearer because from a .then() we can return a new Promise:
-```JavaScript
+```js
 function a() {
     return Promise((resolve, reject) => {
         ...
@@ -127,7 +127,7 @@ When it's created a Promise is in *pending* state.
 In the end, it should be fulfilled/resolved or rejected. 
 
 How to implement code that makes a promise:
-```JavaScript
+```js
 return Promise((resolve, reject) => {
     // to indicate that the promise was fulfilled call resolve with data
     resolve(data);
@@ -141,7 +141,7 @@ return Promise((resolve, reject) => {
 
 ### then, catch, finally
 How to implement code that receives a promise:
-```JavaScript
+```js
 promise
     .then(result => /* called when resolve() was called inside the Promise */ )
     .catch(error => /* called when reject() was called inside the Promise */ )
@@ -155,7 +155,7 @@ Sometimes we can work with several promises in the same, for example, we can mak
 several fetch calls to get some data. 
 
 We can use `Promise.all()` to resolve promises in parallel.
-```JavaScript
+```js
 Promise.all([
     promiseA,
     promiseB,
@@ -172,7 +172,7 @@ Promise.all([
 ```
 We can use `Promise.race()` to resolve promises in parallel, but instead of waiting 
 for all to finish, it fulfills/rejects when the first promise is fulfilled or rejected.
-```JavaScript
+```js
 Promise.race([
     promiseA,
     promiseB,
@@ -189,7 +189,7 @@ Promise.race([
 
 Finally, we have  `Promise.allSettled()` to work with promises in parallel. 
 This one waits for all promises to be `settled`, either resolved or rejected.
-```JavaScript
+```js
 Promise.allSettled([
     promiseA,
     promiseB,
@@ -205,7 +205,7 @@ Promise.allSettled([
 ```
 All these work by fulfilling the promises in parallel. There is no Promise method
 to call them one after the other but as shown before we can do that manually:
-```JavaScript
+```js
 Promise.resolve()
  .then(_ => promiseA)
  .then(_ => promiseB)

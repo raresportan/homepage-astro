@@ -12,7 +12,7 @@ Like any other primitive data type, strings are immutable, each time you need a 
 
 ## How to create strings
 We have several ways to create strings, the most common are the following:
-```JavaScript
+```js
 // using double quotes (" ")
 const name = "Jon Doe";
 console.log(typeof name); // string
@@ -33,16 +33,16 @@ There is no difference between the first two ways, but the back-ticks version al
 
 If you need to use the chars used to create strings inside the string content you have two options:
 * Escape the chars inside
-```JavaScript
+```js
 const name = "Jon \"The Legendary\" Doe";
 ```
 * Use different quotes
-```JavaScript
+```js
 const name = 'Jon "The Legendary" Doe';
 ```
 
 Other useful ways to create strings:
-```JavaScript
+```js
 // combine several strings into one using the + operator
 const abc = "a" + "b" + "c";
 console.log(abc); // abc
@@ -68,7 +68,7 @@ Here are some of the available methods:
 * toLowerCase & toUpperCase    
 * replace
 * repeat
-```JavaScript
+```js
 const fix = "Have you tried turning it off and on again?";
 
 // length
@@ -98,7 +98,7 @@ console.log(chorus.repeat(3));
 
 ## Parameter interpolation
 Strings enclosed by the back-tick are called template literals. Template literals allow string interpolation:
-```JavaScript
+```js
 const lang = "Java";
 const interpolated = ` 
     - Honey, I can't open the jar!
@@ -111,7 +111,7 @@ console.log(interpolated);
     
 ## How to get a character from a string
 To get a specific character from a string we need to provide the character position in the string (0 is the position of the first character):
-```JavaScript
+```js
 const opinion = 'yikes';
 
 // access a char
@@ -127,7 +127,7 @@ console.log(charOverLimit); // undefined
 
 ## How to compare strings
 To check if two strings are equal we use the === operator and use < and > to find which one is bigger.
-```JavaScript
+```js
 const s1 = "Hello";
 const s2 = "HELLO";
 
@@ -137,7 +137,7 @@ console.log('Second is bigger', s1 < s2); // false
 ```
 The comparison works by comparing the number associated with each character. You may have heard about the ASCII table, where a numeric "code" is assigned to each character. Well, the ASCII table contains just a small set of characters. To represent a lot more characters, UNICODE was born.
 Sometimes comparison doesn't work as expected, especially if you use some non-English characters like `ß` or `ü`. If that's the case you need to use comparison by location:
-```JavaScript
+```js
 const s1 = "Hello";
 const s2 = "HELLO";
 
@@ -147,7 +147,7 @@ console.log(s1.localeCompare(s2))
 
 ## String length
 When we're using normal characters all is good, the `length` returns what we expect. But when we start to add emojis or Asian characters `length` is not working as expected:
-```JavaScript
+```js
 const s1 = "Hello";
 console.log(s1.length) // 4
 
@@ -162,7 +162,7 @@ If you need to interpret emojis as one char, you can use a library called [graph
 
 ## Exercises 
 Format a 10 digit phone number to a human-readable version: 0742552233 -> 0742.552.233 using `substring`:
-```JavaScript
+```js
 
 function formatPhoneNumber (phoneNumber) {
     let result = '';
@@ -174,7 +174,7 @@ console.log(formatPhoneNumber("0742552233")) // 0742.552.233
 ```
 
 Censor word: Given a phrase and a word, replace each word's chars with `*`, leave all other words as they are. Use `replaceAll` and `repeat`:
-```JavaScript
+```js
 const censor = (phrase, word) => {
     let result = '';
     // your code here

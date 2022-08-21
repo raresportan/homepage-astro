@@ -35,7 +35,7 @@ care how the API is implemented, in what programming languages, or how it works 
 
 A simple example, is the API offered by [Open Notify](http://open-notify.org/) that provides some of NASA’s awesome data.
 To find how many people are now in space you can call the API in the following way:
-```JavaScript
+```js
 async function getSpacePeople() {
     const data = await fetch('http://api.open-notify.org/astros.json')
         .then(response => response.json());
@@ -74,7 +74,7 @@ it's through that API you use the framework/library.
 For example React library provides a `React` API and through it you can create DOM elements.
 Even if you don't use this API directly because you use JSX, behind the scenes, this API is used.
 
-```JavaScript
+```js
 return React.createElement('div', {className: 'shopping-list'},
   React.createElement('h1', /* ... h1 children ... */),
   React.createElement('ul', /* ... ul children ... */)
@@ -110,14 +110,14 @@ Here are some things to look out for:
 
 * Do not provide functions that look similar but work differently. Even today I have to look up which
 one does what I what from these two: 
-```JavaScript
+```js
 // Don't do this
 array.splice() 
 array.slice()
 ```
 
 * Be consistent, do not use similar words for the same action:
-```JavaScript
+```js
 // Don't do this
 user.remove()
 company.delete()
@@ -128,7 +128,7 @@ Nobody remembers the order if there are many parameters at the same time.
 In JavaScript, you can provide a single object. The advantage is that you can add or remove parameters any time 
 without breaking the backward compatibility. 
 
-```JavaScript
+```js
 // Do this
 function doSomething({a, b, c, d, e, f}){  }
 
@@ -139,7 +139,7 @@ doSomething({
 ```
 * Do not mutate the parameters unexpectedly and do not create unexpected side effects
 
-```JavaScript
+```js
 // Don't do this
 function daysFromNow(date, n) {
     // set new day 
@@ -163,7 +163,7 @@ daysFromNow(now, 2); // now is changed!!!!
 daysFromNow(now, 3); // wrong result
 ```
 * Split big functions and methods in smaller ones. The API surface remains the same but it is easier to use.
-```JavaScript
+```js
 // Don't do this
 function big(a,b,c) {
     // small function logic requires a

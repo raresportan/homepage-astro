@@ -1,5 +1,5 @@
 ---
-title: Let's Learn Eleventy (11ty) - Part IV - Images
+title: Let's Learn Eleventy (11ty) - Images
 date: 2021-01-23
 description: In the fourth part of the Let't Learn Eleventy series, we'll learn how use images with eleventy-img plugin
 keywords: ['Eleventy', '11ty']
@@ -35,7 +35,7 @@ Why picture element instead of img? There are a lot of reasons, most importantly
 If you want to learn more, please read what I have written about [the picture element](/the-picture-tag/).
 
 We want an HTML output like this:
-```HTML
+```html
 <picture>
   <source 
     type="image/avif"
@@ -97,7 +97,7 @@ The shortcode has a name followed by the arguments separated by comma:
 ```
 
 For example:
-```HTML
+```html
 {% image "./src/images/dog.jpg", "My pug, Bobby",  "(min-width: 640px) 50vw, 100vw", "Bobby sleeping in shade" %}
 ```
 
@@ -120,7 +120,7 @@ The `Image` function requires the following information:
 * The sizes we want for the images 
 * The formats we want 
 
-```JavaScript
+```js
 const Image = require("@11ty/eleventy-img");
 
 // Note: async / await
@@ -131,8 +131,10 @@ async function createImages(src) {
     });
 }  
 ```
+
 The *metadata* object contains information about each image that was generated.
 We have three image formats (avif, webp, and jpeg). For each we have three sizes (320, 640, and 1280):
+
 ```
 { avif:
    [ { format: 'avif',
@@ -177,10 +179,11 @@ We have three image formats (avif, webp, and jpeg). For each we have three sizes
     ] 
 }
 ```
+
 One issue we can have with the metadata is the name of a generated image. What if we want to change that? 
 Well in that case we should provide to `Image` a function called `filenameFormat` that does it. 
 
-```JavaScript
+```js
 const Image = require("@11ty/eleventy-img");
 
 // Note: async / await
@@ -204,6 +207,7 @@ async function createImages(src) {
 }  
 ```
 Now, if our original image is `dog.jpg`, the names of the images will look like this:
+
 ```bash
 { avif:
    [ { format: 'avif',
@@ -237,7 +241,7 @@ Now, if our original image is `dog.jpg`, the names of the images will look like 
   jpeg: ...     
 ```
 One final note, we can also provide an output folder for the images, by setting the `outputDir`:
-```JavaScript
+```js
 const Image = require("@11ty/eleventy-img");
 
 // Note: async / await
@@ -255,7 +259,8 @@ Once we have the metadata, we can use it to generate the picture.
 
 The simplest version of the shortcode uses `Image.generateHTML`, from the same plugin, to generate the HTML output.
 In most cases, this should be enough.
-```JavaScript
+
+```js
 const Image = require("@11ty/eleventy-img");
 
 function wrapFigure(output, caption) {
@@ -288,8 +293,10 @@ async function imageShortcode(src, alt, sizes='', caption='') {
 
 module.exports = imageShortcode;
 ```
+
 If we need complete control of the output we can add our implementation instead of using `Image.generateHTML`:
-```JavaScript
+
+```js
 const Image = require("@11ty/eleventy-img");
 
 function wrapFigure(output, caption) {
@@ -342,7 +349,7 @@ module.exports = imageShortcode;
 ### Add the shortcode in configuration file
 Before we can use the shortcode, we need to tell Eleventy about it, meaning we need to add it the 
 `.eleventy.js`:
-```JavaScript
+```js
 const imageShortcode = require('./<path-to-file>/imageShortcode.js');
 
 module.exports = function(eleventyConfig) {
@@ -354,7 +361,7 @@ module.exports = function(eleventyConfig) {
 
 ### Use the shortcode inside markdown
 Finally, we can use the shortcode as planed:
-```Markdown
+```markdown
 ---
 title: 'Eleventy Images Demo'
 ---
@@ -370,7 +377,7 @@ the current page, not in a single, global folder.
 We could use the page `inputPath` to create the absolute path Eleventy needs to find the image. So, for example, inside our 
 shortcode implementation we check if the source starts with a dot and if not we assume is a local image:
 
-```JavaScript
+```js
 async function imageShortcode(src, alt, sizes='', caption='') {
   let imgSrc = src; 
 
@@ -393,7 +400,7 @@ async function imageShortcode(src, alt, sizes='', caption='') {
 };
 ```
 In Markdown, we use "dog.jpg" as the source instead of "./src/blog/mypost/dog.jpg":
-```Markdown
+```markdown
 {% image "dog.jpg", "My pug, Bobby",  "(min-width: 640px) 50vw, 100vw", "Bobby sleeping in shade" %}
 ```
 
@@ -416,12 +423,12 @@ To do something like this, we need a couple of more things:
 * the second image media(query)
 * and optionally different sizes for this second image
 
-```Markdown
+```html
 {% image "./src/images/dog.jpg", "My pug, Bobby", "(min-width: 640px) 50vw, 100vw", "", "./src/images/dogdetail.png", "(max-width: 480px)", "100vw" %}
 ```
 
 Here is the updated code: 
-```JavaScript
+```js
 ... 
 
 function generateHTML(metadata, imageAttributes, detailMetadata, detailMedia, detailSizes) {

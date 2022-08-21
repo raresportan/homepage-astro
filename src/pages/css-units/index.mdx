@@ -80,21 +80,21 @@ Here are some examples:
 
 ### calc
 You can use `calc()` function to determine a dimension using multiple units:
-```CSS
+```css
 width: calc(100% - 16px) 
 ```
 The width is calculated dynamically by subtracting 16px from the maximum width.
 
 ### clamp
 `clamp()` function accepts a minimum, an ideal and a maximum value. All those units can be different if necessary:
-```CSS
+```css
 font-size: clamp(18px, 4vw, 3rem)
 ```
 The font size will be a minimum of 18px, a maximum of 3rem and 4vw in the rest.
 
 ### min and max
 `min()` and `max()` are two functions that can limit a value depending on context:
-```CSS
+```css
 width: min(100vw - 3rem, 80ch)
 ```
 Here the width will be the minimum between 100vw - 3rem and 80ch. On different screen sizes, there will be a different minimum.

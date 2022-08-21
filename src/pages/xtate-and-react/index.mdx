@@ -22,7 +22,7 @@ Because this is where XState shines when certain actions are available only in c
 
 To get data from the websocket we need to do the following steps:
 1. Initialize the websocket
-```JavaScript
+```js
 const socket = new WebSocket('https://www.cryptofacilities.com/');
 const connectedHandler = () => { console.log('Connected')};
 
@@ -32,7 +32,7 @@ const messageHandler = (e) => { console.log('Message received', e.data)};
 socket.addEventListener('message', messageHandler);   
 ```
 2. Subscribe to a specific cryptocurrency data
-```JavaScript
+```js
 const subscribeEvent = {
   "event": "subscribe",
   "feed": "book_ui_1",
@@ -41,7 +41,7 @@ const subscribeEvent = {
 socket.send(JSON.stringify(subscribeEvent));
 ```
 3. Wait for the websocket to acknowledge the subscription
-```JavaScript
+```js
 
 // update the messageHandler to handle subscribed events
 const messageHandler = (e) => { 
@@ -55,7 +55,7 @@ const messageHandler = (e) => {
 };
 ```
 4. Receive the initial data from the websocket as a snapshot 
-```JavaScript
+```js
 // update the messageHandler to handle snapshots
 const messageHandler = (e) => { 
   console.log('Message received', e.data);
@@ -73,7 +73,7 @@ const messageHandler = (e) => {
 };
 ```
 5. Receive data changes(deltas) from the websocket
-```JavaScript
+```js
 // update the messageHandler to handle deltas
 const messageHandler = (e) => { 
   console.log('Message received', e.data);
@@ -94,7 +94,7 @@ const messageHandler = (e) => {
 };
 ```
 6. Unsubscribe from the cryptocurrency data
-```JavaScript
+```js
 
 // send unsubscribe event
 const unsubscribeEvent = {
@@ -127,7 +127,7 @@ const messageHandler = (e) => {
 ```
 
 7. Subscribe to another cryptocurrency data
-```JavaScript
+```js
 const subscribeEvent = {
   "event": "subscribe",
   "feed": "book_ui_1",
@@ -143,7 +143,7 @@ To use correctly the websocket we need to have the right state:
 
 ## A machine for a websocket
 
-```JavaScript
+```js
 let socket;
 
 const wsMachine = Machine({
@@ -335,7 +335,7 @@ First, we need to add XState and XState React libraries to your project:
 npm i xstate @xstate-react
 ```
 Then create the machine in a file like `websocket-machine.js` (note that `Machine` is deprecated in favor of `createMachine`)
-```JavaScript
+```js
 import { createMachine } from 'xstate';
 
 export const wsMachine = createMachine({
@@ -343,7 +343,7 @@ export const wsMachine = createMachine({
 }  
 ```
 We need to create a React context that uses the machine to create *an instance of the machine* as a service:
-```JSX
+```jsx
 import React, { createContext } from 'react';
 import { useInterpret } from '@xstate/react';
 import machine from './websocket-machine';
@@ -362,7 +362,7 @@ export const MachineProvider = (props) => {
 ```
 
 Use the context in the part of the app that uses the machine:
-```JSX
+```jsx
 import MachineProvider from './machine-context';
 
 <MachineProvider>
@@ -370,7 +370,7 @@ import MachineProvider from './machine-context';
 </MachineProvider>
 ```
 Finally, in the components that are children of `MachineProvider`, we can use the `machineService`:
-```JSX
+```jsx
 import React, { useContext } from 'react';
 import { MachineContext } from './machine-context';
 

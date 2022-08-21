@@ -30,7 +30,7 @@ does not have any observable side effect.
 
 * It has no side effects: nothing outside the function is affected in any way.
 * It doesn't use global state.
-```JavaScript
+```js
 // impure because it uses global variable
 const increase = () => {
   window._count = window._count || 0;
@@ -43,7 +43,7 @@ const increase = (state = 0) => state + 1;
 window._count = increase(window._count);
 ```
 * It doesn’t uses outside state or functions that use outside state. 
-```JavaScript
+```js
 // impure because it uses external variable
 let counter = 1;
 const addImpure = n => counter += n;
@@ -51,7 +51,7 @@ const addImpure = n => counter += n;
 const add = (n, counter) => counter + n; 
 ```
 * It doesn’t maintain internal state. 
-```JavaScript
+```js
 // impure because it uses maintains state
 class Counter() {
   constructor(initial = 0){
@@ -69,7 +69,7 @@ class Counter() {
 
 
 * It doesn't mutate any of the input parameters. 
-```JavaScript
+```js
 // impure because it uses mutates arguments
 function tomorrow(date) {
   date.setDate(date.getDate() + 1)
@@ -113,7 +113,7 @@ create new things and treat everything as immutable even if they are not.
 There are some big advantages to this style of programming: No code can mutate data by mistake.
 An entire class of bugs is gone.
 
-```JavaScript
+```js
 // objects are mutable, but we treat them as immutable
 const state = {
     loggedin : false,    
@@ -154,7 +154,7 @@ const removeNumber = (numbers, numberToRemove) =>
 
 Of course, no concurency issues and another advandage is that you can detect changes 
 by comparing references instead of comparing property with property.
-```JavaScript
+```js
 const oldState = {
     loggedin: false,
 }
@@ -199,7 +199,7 @@ that implement business logic.
 This can be done only if functions are first-class in your language, that is if they can be sent as arguments to 
 other functions and can be returned from other functions.
 
-```JavaScript
+```js
 const replaceWithSpace = s => s.replace(/\s{2,}/ig, ' ');
 const split = s => s.split(' ');
 const toLower = x => x.toLowerCase();
@@ -219,7 +219,7 @@ of one function becomes the argument to the next.
 For this, we need to break the functions with many arguments into a series of functions 
 that each take one argument and ultimately produce the same result as the original function.
 
-```JavaScript
+```js
 // original
 const add = (x, y) => x + y;
 add(1,2)
@@ -242,7 +242,7 @@ rest of the world, it uses the data to perform side effects in the world: saving
 or loading data from file system or network, rendering on the screen, 
 logging and any other operation with performance implications.
 
-```JavaScript
+```js
 // Pure
 const repeat = howManyTimes => str => str.repeat(howManyTimes);
 const repeat3 = repeat(3);

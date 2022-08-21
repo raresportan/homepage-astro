@@ -115,6 +115,7 @@ render different navigation items for different pages:
   </nav>
 {% endif %}
 ```
+
 And you used it by *including* it in a site header component:
 ```html
 <header role="banner">
@@ -124,11 +125,13 @@ And you used it by *including* it in a site header component:
     {% include "components/nav.njk" %} 
 </header>
 ```
+
 *Note:* the path to include must be relative to `_includes` folder (e.g. `_includes/components/nav.njk`) not 
 relative to the file that includes `nav.njk`!
 
 What that does is it simply takes the content of `nav.njk` and inserts its content in the header, 
 like there was a single file from the beginning:
+
 ```html 
 <header role="banner">
     <a href="/">
@@ -182,7 +185,7 @@ A filter is a (pure) function that modifies some content. While the purpose of f
 nothing stops you from creating a full component markup from a filter.
 
 First, you need to create the filter's function:
-```JavaScript
+```js
 module.exports = function dateFormatFilter(dateString) {
   const options = { year: 'numeric', month: 'long', day: '2-digit' };
   const date = new Date(dateString);
@@ -194,7 +197,7 @@ module.exports = function dateFormatFilter(dateString) {
   }};
 ```
 Now you need to register the filter with Eleventy, in the configuration file, `.eleventy.js`:
-```JavaScript
+```js
 const dateFormatFilter = require('./<path-to-file>/date-format-filter.js');
 
 module.exports = function(eleventyConfig) {
@@ -212,7 +215,7 @@ Finally, you can use the filter in a layout or page, with the pipe `|` symbol fo
 ```
 
 As said, nothing stops us from using filters to create content like this:
-```JavaScript
+```js
 module.exports = function greeting(name) {
     return `
         <section>
@@ -250,7 +253,7 @@ Shortcodes are a way to extend the vocabulary of the template language, to teach
 Using shortcodes we can again extract reusable chunks of code in separate components.
 
 Just as filters, we first create a function:
-```JavaScript
+```js
 module.exports = function card(title, text, cta, link, type) {
   return `
         <article class="card ${type}">
@@ -264,7 +267,7 @@ module.exports = function card(title, text, cta, link, type) {
 };
 ```
 Then we need to register the function with Eleventy in `eleventy.js`:
-```JavaScript
+```js
 const card = require('./<path-to-file>/card.js');
 
 module.exports = function(eleventyConfig) {
@@ -286,7 +289,7 @@ Here goes the card content
 {% endcard %}
 ```
 In this case, the implementation is a bit different:
-```JavaScript
+```js
 
 // First argument is the content between the open and close tags
 module.exports = function card(content, title, cta, link, type) {
@@ -302,7 +305,7 @@ module.exports = function card(content, title, cta, link, type) {
 };
 ```
 Also, you need to register these types of shortcodes differently with Eleventy, using `addPairedShortcode` instead of `addShortcode`
-```JavaScript
+```js
 const card = require('./<path-to-file>/card.js');
 
 module.exports = function(eleventyConfig) {

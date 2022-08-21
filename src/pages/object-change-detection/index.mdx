@@ -19,7 +19,7 @@ has access to `window` so finding the culprit is not easy.
 
 So, at the start of the journey I put an object on window like this:
 
-```JavaScript
+```js
 window.pageData = {
     pageName: 'Payment',
     userStatus: 'anonymous',
@@ -27,7 +27,7 @@ window.pageData = {
 }
 ```
 For some reason they receive:
-```JavaScript
+```js
 window.pageData = {
     pageName: '',
     userStatus: '',
@@ -38,7 +38,7 @@ window.pageData = {
 What can be done in this case? Blaming each other :) is one option, but not very helpful.
 
 The first thing I did was to freeze the object, to see if they get it that way:
-```JavaScript
+```js
 window.pageData = Object.freeze({
     pageName: 'Payment',
     userStatus: 'anonymous',
@@ -50,7 +50,7 @@ But there were still some cases that broke some legit functionality that needed 
 
 The second thing I did was to create a Proxy around the data, and log each change to it:
 
-```JavaScript
+```js
 window.pageData = new Proxy({
     pageName: 'Payment',
     userStatus: 'anonymous',

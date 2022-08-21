@@ -34,7 +34,7 @@ So, to ignore the future post we need to somehow update the GraphQL query that g
 to filter the posts with future dates.
 
 The most direct way would be something like this:
-```JavaScript
+```js
 const result = await graphql(`
     query {
       allMdx((filter: {frontmatter: {date: {lt: $TODAY}}})) {
@@ -59,7 +59,7 @@ What can be done instead is to create a new field on each MDX node, called `isFu
 true is the post is in future, false otherwise.
 
 In gatsby-node.js, inside `onCreateNode()` we add the new field like this: 
-```JavaScript
+```js
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
@@ -79,7 +79,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 ```
 Now, after we restart gatsby develop, we can use it to filter the posts.
 First we don't generate pages for future posts in `gatsby-node.js`
-```JavaScript
+```js
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
@@ -110,7 +110,7 @@ exports.createPages = async ({ graphql, actions }) => {
 ```
 
 Next we don't add future post on the posts list, in `index.js`
-```JavaScript
+```js
 export const pageQuery = graphql`
   query {
     site {
@@ -143,7 +143,7 @@ export const pageQuery = graphql`
 ```
 And finally, at least in my case, stop the RSS feed to include the future posts, 
 in `gatsby-config.js`:
-```JavaScript
+```js
 feeds: [
   {
     serialize: ({ query: { site, allMdx } }) => {

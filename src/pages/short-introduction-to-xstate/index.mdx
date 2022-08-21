@@ -38,7 +38,7 @@ This means that:
 * When the car is not accelerating or decelerating the speed is constant (even if is stopped)
 
 An implementation of the FSM using [XState](https://xstate.js.org/) looks like this:
-```JavaScript
+```js
  const carMachine = Machine({
     id: 'car',
     initial: 'stopped',
@@ -84,7 +84,7 @@ First, you need to add the xstate npm package to your project:
 npm install xstate --save
 ```
 Then import Machine or createMachine where you create the machine:
-```JavaScript
+```js
 import { Machine, createMachine } from 'xstate';
 ```
 `Machine` and `createMachine` have the same effect, but Machine will be deprecated in the future, so you should use `createMachine`.
@@ -104,7 +104,7 @@ The configuration needs two things :
 
 The simplest machine can have only one state. If we ignore the time before the Big Bang, the universe is always expanding. A machine for 
 the universe looks like this then:
-```JavaScript
+```js
 const config = {
   initial: 'expanding',
   states: {
@@ -119,7 +119,7 @@ If machines have more than one state, we need *ways* to make the machine change 
 We cannot just send any random events, we need to trigger events that are understood by the machine and more precisely, events that are available for the current state. 
 
 Consider the following *lightbulb* machine. A light bulb can either be lit or unlit. 
-```JavaScript
+```js
 const config = {
   initial: 'unlit',
   states: {
@@ -132,7 +132,7 @@ const lightbulbMachine = Machine(config);
 ```
 We can turn on the bulb when is unlit, and turn it off when is lit. This means that the LIT event is available only when the light bulb is unlit, and the 
 UNLIT event is available only when the bulb is lit.
-```JavaScript
+```js
 const config = {
   initial: 'unlit',
   states: {
@@ -158,7 +158,7 @@ __If you send events that are not supported by the current state, they are ignor
 The *value* for an event is the *targeted state* that the machine should transition to. As a shorthand, we can just 
 specify the name of the state, but that is the same as the following:
 
-```JavaScript
+```js
 const config = {
   initial: 'unlit',
   states: {
@@ -183,7 +183,7 @@ const lightbulbMachine = Machine(config);
 ```
 So now the question is *why should I use the long version instead of the shorthand?* Because the long version allows you to also set some actions 
 that are executed when the event is triggered:
-```JavaScript
+```js
 const config = {
   initial: 'unlit',
   states: {
@@ -220,7 +220,7 @@ A third thing you can configure for a machine, after state and events, is the *c
 To keep things simple, let's continue with the light bulb machine and assume the light bulb is intelligent: it's guaranteed to be turned on and off 10000 times. When it approaches that limit, it sends 
 an email to notify you to buy a new one.
 
-```JavaScript
+```js
 const mailService = {
   send: msg => {
     console.log(msg);
@@ -271,7 +271,7 @@ We can use the machine in two ways: read its state and send events to change the
 Before we can use the machine we need to use an *interpreter* to create an instance of the machine. This means we can have multiple machine instances,
 each with its own state. That makes sense right? We have multiple light bulbs in our house and we cannot use the same machine for all because some might be on and some off.
 
-```JavaScript
+```js
 import { interpret } from 'xstate'
 ...
 const lightbulbMachine = Machine(config);

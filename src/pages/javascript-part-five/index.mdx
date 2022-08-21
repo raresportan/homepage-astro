@@ -7,7 +7,7 @@ layout: "../../layouts/BlogPost.astro"
 ---
 
 The purpose of any program is to transform data. Any program needs data. In JavaScript, when we talk about the program's data we talk about *values*:
-```JavaScript
+```js
 42
 "Deep Thought"
 true
@@ -19,7 +19,7 @@ null
 Using values like this is perfectly fine, but we don't have their meaning (values like these are called *magic values* because nobody knows why they are what they are, they just work like magic).
 
 To solve this problem we can bind values to names so we can reference them and understand their purpose and meaning:
-```JavaScript
+```js
 const answer = 42;
 const superComputerName = "Deep Thought";
 let isThisTheAnswer = true;
@@ -38,7 +38,7 @@ We'll answer all these questions.
 Data can have different roles or meanings, can be of different types. A value is a piece of data of a specific type.
 Values are things that are. Types are things that could be.
 
-```JavaScript
+```js
 42 // type number 
 "Deep Thought" // type string
 true // type boolean
@@ -48,7 +48,7 @@ undefined // type undefined
 null // type null
 ```
 To find the type of a value, we use the built-in `typeof` operator:
-```JavaScript
+```js
 typeof 42 // "number"
 typeof "Deep Thought" // "string"
 typeof true // "boolean"
@@ -66,7 +66,7 @@ Sadly `typeof` operator has some bugs and returns the wrong value for some of th
 *These bugs are from the early days of JavaScript and cannot be fixed because some part of the Internet relies on them. All new versions of JavaScript are perfectly compatible with old ones, old code will never break when JavaScript changes.*
 
 What about bindings? Can we find the type of the bound value? Yes, `typeof` operator works with bindings also:
-```JavaScript
+```js
 const answer = 42;
 typeof answer // "number"
 
@@ -89,7 +89,7 @@ let author = null;
 typeof author // "object"
 ```
 What if we just declare a binding without a value?
-```JavaScript
+```js
 let x;
 typeof x;
 ```
@@ -105,14 +105,14 @@ JavaScript types can be primitive types or objects.
 If you have the value `1` there is no way to change it to value `2`. If you have the value `"Hello"` you can't change it to `"Hey"`. No way.
 
 You can use bindings to change the bound value, but that doesn't mean you change the value `1` into value `2`, it means you bind `2` where `1` was bound:
-```JavaScript
+```js
 let x = 1; // x is bound to 1
 x = 2; // x is bound to 2
 ```
 What happens to `1`? It is *garbage collected*, removed from memory, wiped. 
 
 Same with strings, you can't change `"Hey"` to  `"Hello"`, only bind a new value:
-```JavaScript
+```js
 let greeting = "Hey"; 
 greeting = "Hello"; // you can only bind another value
 
@@ -121,7 +121,7 @@ const surname = "Snow";
 const name = firstname + " " + surname;
 ```
 Strings have methods, will see that in a bit, but all those methods return new strings, they don't change the string they are called on:
-```JavaScript
+```js
 const name = "Jon Snow";
 name.toUpperCase();
 console.log("Name:", name); // still "Jon Snow"
@@ -131,7 +131,7 @@ const upper  = name.toUpperCase();
 console.log("NAME:", upper); // JON SNOW
 ```
 On the other hand, objects are mutable, their "content" can be changed:
-```JavaScript
+```js
 // a person object with a "name" property
 const person = {
   name: "Jon Snow",
@@ -161,7 +161,7 @@ Special numbers are `NaN` (Not a Number), `Infinity` and `-Infinity`.
 
 If you need numbers over that limit you need to use BigInts. Note that BigInt is a new addition to the language and it doesn't work in older browsers.
 
-```JavaScript
+```js
 const n = 1;
 const half = 0.5;
 const solarSystemAge = 4.568e9;
@@ -218,7 +218,7 @@ console.log("typeof -Infinity:", typeof -Infinity) // typeof -Infinity: number
 
 ```
 Basic operations:
-```JavaScript
+```js
 let sum = 1 + 2;
 
 let diff = 2 - 1;
@@ -250,7 +250,7 @@ We can also do bitwise operators.
 
 Not a number, `NaN` is a very very special number. Yes, NaN *is a number* and is called *not a number*. You get NaN when you try to get a number 
 from something that can't be a number. NaN is supposed to denote the result of a nonsensical computation.
-```JavaScript
+```js
 // When strings cannot be converted to numbers you get NaN
 const time = Number("01:02:08.123");
 console.log("Time:", time); // Time: NaN
@@ -267,7 +267,7 @@ console.log("typeof NaN:", typeof NaN) // typeof NaN: number  ¯\_(ツ)_/¯
 ```
 
 Another small weirdness is the number `-0`. I'll mention it just so you're aware of it.
-```JavaScript
+```js
 let zero = 0; // 0
 let plus0 = +0; // 0
 let minus0 = -0; // -0
@@ -281,7 +281,7 @@ Math.atan2(0, -0); // PI
 ```
 
 `Math` object provides mathematical operations that work with numbers, here are some of them:
-```JavaScript
+```js
 Math.random(); // Random number between 0 and 1
 Math.PI
 Math.abs(x) // Absolute value
