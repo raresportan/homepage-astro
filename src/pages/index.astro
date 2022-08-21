@@ -8,8 +8,8 @@ import Header from "../components/Header.astro";
 // Use Astro.glob() to fetch all posts, and then sort them by date.
 const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
 	(a, b) =>
-		new Date(b.frontmatter.date).valueOf() -
-		new Date(a.frontmatter.date).valueOf()
+		new Date(b.frontmatter.pubDate).valueOf() -
+		new Date(a.frontmatter.pubDate).valueOf()
 );
 
 export const formatDate = (dateString) => {
@@ -58,8 +58,8 @@ export const formatDate = (dateString) => {
 										{post.frontmatter.title}
 									</a>
 								</h2>
-								<time datetime={post.frontmatter.date}>
-									{formatDate(post.frontmatter.date)} •{" "}
+								<time datetime={post.frontmatter.pubDate}>
+									{formatDate(post.frontmatter.pubDate)} •{" "}
 									{post.frontmatter.minutesRead}
 									{post.frontmatter.keywords ? (
 										<>

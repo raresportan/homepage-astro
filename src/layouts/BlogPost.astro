@@ -10,7 +10,7 @@ export interface Props {
 	content: {
 		title: string;
 		description: string;
-		date?: string;
+		pubDate?: string;
 		updatedDate?: string;
 		heroImage?: string;
 		keywords?: Array<string>;
@@ -33,10 +33,15 @@ export const formatDate = (dateString) => {
 };
 
 const {
-	content: { title, description, date, updatedDate, keywords, minutesRead },
+	content: {
+		title,
+		description,
+		pubDate,
+		updatedDate,
+		keywords,
+		minutesRead,
+	},
 } = Astro.props as Props;
-
-console.log("minutesRead", minutesRead);
 ---
 
 <html>
@@ -52,9 +57,9 @@ console.log("minutesRead", minutesRead);
 				<header>
 					<h1 class="title">{title}</h1>
 					{
-						date && (
+						pubDate && (
 							<time>
-								{formatDate(date)}{" "}
+								{formatDate(pubDate)}{" "}
 								{minutesRead && (
 									<>
 										{" "}
