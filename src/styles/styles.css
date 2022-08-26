@@ -147,6 +147,7 @@ header[role="banner"]>.site-name a {
 }
 
 article {
+    contain: content;
     margin-top: var(--size-900);
 }
 
