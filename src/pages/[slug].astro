@@ -1,0 +1,95 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Newsletter from "../components/Newsletter.astro";
+import TwitterShare from "../components/TwitterShare.astro";
+import Waves from "../components/Waves.astro";
+import { formatDate, slug } from "../lib/utils";
+
+export async function getStaticPaths() {
+    const posts = await Astro.glob("../content/*/*.{md,mdx}")
+
+    return posts.map(post => {
+		const postSlug = slug(post);
+        return {
+            params: { slug: postSlug },
+			props: {...post}
+        }
+    })
+}
+
+const {
+	frontmatter: { 
+		title, 
+		description, 
+		pubDate, 
+		minutesRead, 
+		keywords, 
+		updatedDate
+	}, Content} = Astro.props;
+
+---    
+
+
+<html lang="en">
+	<head>
+		<link href="./prism-dark.css" rel="stylesheet" />
+		<BaseHead title={title} description={description} />
+	</head>
+
+	<body class:list={["light"]}>
+		<Header title={title} isOnHomePage={false} />
+		<main id="main" role="main">
+			<article class="post flow centered-content">
+				<header>
+					<h1 class="title">{title}</h1>
+					{
+						pubDate && (
+							<time>
+								{formatDate(pubDate)}{" "}
+								{minutesRead && (
+									<>
+										{" "}
+										• <em>{minutesRead}</em>
+									</>
+								)}
+								{keywords && (
+									<>
+										{" "}
+										• <em>{keywords.join(" ")}</em>
+									</>
+								)}
+							</time>
+						)
+					}
+					{
+						updatedDate && (
+							<div>
+								Last updated on <time>{updatedDate}</time>
+							</div>
+						)
+					}
+				</header>
+				<Content /> 
+				
+			</article>
+
+			<section class="post-footer">
+				<Waves
+					id="gentle-wave-login"
+					className="footer"
+					wave1X="0"
+					wave2X="48"
+					wave3X="120"
+					wave4X="68"
+				/>
+				<TwitterShare title={title} /> 
+				<div class="centered-content">
+					<Newsletter/>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html> 

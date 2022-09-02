@@ -10,13 +10,13 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 export default defineConfig({
   site: 'https://raresportan.com',
   markdown: {
-    syntaxHighlight: 'prism',
-    rehypePlugins: [remarkReadingTime, rehypeAutolinkHeadings],
     extendDefaultPlugins: true,
+    syntaxHighlight: 'prism',
+    rehypePlugins: [remarkReadingTime],    
   },
   integrations: [
     mdx({
-      rehypePlugins: [remarkReadingTime, rehypeAutolinkHeadings],
+      rehypePlugins: [remarkReadingTime],
     }), 
     sitemap(), 
     // ogimage({

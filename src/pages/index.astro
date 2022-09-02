@@ -4,27 +4,15 @@ import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import Bio from "../components/Bio.astro";
 import Header from "../components/Header.astro";
+import { formatDate, slug } from "../lib/utils";
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob("./*/*.{md,mdx}")).sort(
+const posts = (await Astro.glob("../content/*/*.{md,mdx}")).sort(
 	(a, b) =>
 		new Date(b.frontmatter.pubDate).valueOf() -
 		new Date(a.frontmatter.pubDate).valueOf()
 );
 
-export const formatDate = (dateString) => {
-	if (!dateString) {
-		return "";
-	}
-	const options = { year: "numeric", month: "long", day: "2-digit" };
-	const date = new Date(dateString);
-	try {
-		return date.toLocaleDateString("default", options);
-	} catch (err) {
-		// handle IE 11
-		return date.toLocaleDateString();
-	}
-};
 ---
 
 <!DOCTYPE html>
@@ -54,7 +42,7 @@ export const formatDate = (dateString) => {
 						<article>
 							<header>
 								<h2>
-									<a href={post.url}>
+									<a href={slug(post)}>
 										{post.frontmatter.title}
 									</a>
 								</h2>
