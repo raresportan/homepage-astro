@@ -38,6 +38,7 @@ import { Picture } from '@astrojs/image/components';
 
 <Picture src={import('./build_log.png')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt="Caching HTML renderer compilation"/>
 
@@ -59,6 +60,7 @@ After these changes, the build time is now 5 minutes. Not 3 as before but still 
 
 <Picture src={import('./builds.png')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt="Builds"/>
 

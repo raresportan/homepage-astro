@@ -44,7 +44,7 @@ const {
 } = Astro.props as Props;
 ---
 
-<html>
+<html lang="en">
 	<head>
 		<link href="./prism-dark.css" rel="stylesheet" />
 		<BaseHead title={title} description={description} />
@@ -84,8 +84,7 @@ const {
 					}
 				</header>
 				<slot />
-
-				<TwitterShare title={title} />
+				
 			</article>
 
 			<section class="post-footer">
@@ -97,8 +96,9 @@ const {
 					wave3X="120"
 					wave4X="68"
 				/>
+				<TwitterShare title={title} />
 				<div class="centered-content">
-					<Newsletter client:idle />
+					<Newsletter/>
 				</div>
 			</section>
 		</main>

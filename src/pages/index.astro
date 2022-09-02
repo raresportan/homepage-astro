@@ -33,7 +33,7 @@ export const formatDate = (dateString) => {
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
+		<Header isOnHomePage={true}/>
 		<Bio />
 		<main>
 			<div class="centered-content">
@@ -85,6 +85,6 @@ export const formatDate = (dateString) => {
 				}
 			</div>
 		</main>
-		<Footer />
+		<Footer isOnHomePage={true}/>
 	</body>
 </html>

@@ -83,6 +83,7 @@ h4 a {
 ul a {
     text-decoration-color: var(--yellow);
     text-underline-offset: 2px;
+    text-decoration-thickness: 3px;
 }
 
 .dark footer>ul li {
@@ -136,10 +137,10 @@ nav ul {
 }
 
 header[role="banner"]>.site-name {
-    font-size: 1.5rem;
+    font-size: var(--size-700);
     margin-top: 2.5rem;
     margin-bottom: 1rem;
-    font-weight: 500;
+    /* font-weight: 500; */
 }
 
 header[role="banner"]>.site-name a {
@@ -216,6 +217,14 @@ header {
 
 main+footer {
     padding-top: 3rem;
+}
+
+main+footer:not(.home){
+    background-color: #27292d;
+    color: #fff;
+}
+.dark main+footer:not(.home){
+    background-color: #000;
 }
 
 footer a {
@@ -647,26 +656,27 @@ a.gatsby-resp-image-link {
 
 .twitter-share {
     display: flex;
+    justify-content: center;
     align-items: center;
-    background: var(--yellow-light);
-    padding: 1.5rem 1rem;
+    /* background: var(--yellow-light); */
+    padding: 1rem;
     margin-top: 2rem;
     border-radius: 4px;
 }
 
-.dark .twitter-share {
+/* .dark .twitter-share {
     background-color: #000;
-}
+} */
 
 .twitter-share svg {
     min-width: 3rem;
-    margin-top: -3.5rem;
-    margin-left: -2.5rem;
+    /* margin-top: -1.8rem;
+    margin-left: -2.5rem; */
 }
 
 .twitter-share a {
-    font-style: italic;
-    margin: 0 auto;
+    margin: .5rem;
+    padding: .5rem;
 }
 
 @media only screen and (max-width: 480px) {
@@ -677,11 +687,11 @@ a.gatsby-resp-image-link {
     footer>ul li {
         flex-grow: 1;
     }
-
+/* 
     .twitter-share svg {
         margin-top: -6rem;
         margin-left: -2rem;
-    }
+    } */
 }
 
 table {

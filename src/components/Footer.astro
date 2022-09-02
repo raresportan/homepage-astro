@@ -1,8 +1,11 @@
 ---
 import { SITE_SOCIAL } from "../config";
+
+const { isOnHomePage } = Astro.props;
 ---
 
-<footer>
+<footer class={isOnHomePage ? 'home' : ''}>
+	<!-- <p>&copy;2020-present Rares Portan. All Rights Reserved.</p> -->
 	<ul class="centered-content">
 		<li><a href="/rss.xml" target="_blank" rel="noreferrer">rss</a></li>
 		<li>

@@ -21,6 +21,7 @@ import { Picture } from '@astrojs/image/components';
 
 <Picture src={import('./carrd.png')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt= "Setting up a site a Carrd" />
 
@@ -80,6 +81,7 @@ It's incredibly tedious, it's unbelievable we still do it in the same way in 202
 
 <Picture src={import('./quartz.jpeg')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt= "Quartz Composer" />
 

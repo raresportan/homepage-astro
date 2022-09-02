@@ -213,6 +213,7 @@ import { Picture } from '@astrojs/image/components';
 
 <Picture src={import('./time.png')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt= "Every day at 7:00 AM"/>
 
@@ -222,6 +223,7 @@ the Netlify build hook URL. Also, select POST as Method.
 
 <Picture src={import('./webhook.png')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt= "Create the webhook trigger"/>
 

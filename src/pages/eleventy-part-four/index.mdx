@@ -75,6 +75,7 @@ import { Picture } from '@astrojs/image/components';
 
 <Picture src={import('./halfscreen.png')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt= "Desktop version"/>
 
@@ -83,6 +84,7 @@ import { Picture } from '@astrojs/image/components';
 
 <Picture src={import('./fullscreen.png')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt= "Mobile version"/>
 
@@ -414,6 +416,7 @@ that shows only a part of the original. Sometimes people do something like this,
 
 <Picture src={import('./detail.jpg')}
         widths={[480, 800]} 
+        formats={["webp"]}
         sizes="(max-width: 600px) 480px, 800px" 
         alt= "Mobile version is a detail of the original"/>
 
