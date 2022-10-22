@@ -31,7 +31,24 @@ const {
 
 ---    
 
+<script>
+	document.querySelectorAll('pre[class*="language-"]').forEach(element => {
+		const code = element && element.querySelector('code');
+		if(code) {
+			const btn = document.createElement('button');
+			btn.innerHTML = 'Copy';
+			btn.className = 'copy-button';
+			btn.addEventListener('click', function(){
+				navigator && navigator.clipboard && navigator.clipboard.writeText(code.innerText)
+				.then(() => btn.innerHTML = 'Copied!', 
+					  () => btn.innerHTML = 'Copy failed');
+			})
+			element.appendChild(btn);	
+		}	
+	});
+</script>
 
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<link href="./prism-dark.css" rel="stylesheet" />

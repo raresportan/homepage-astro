@@ -161,6 +161,7 @@ pre[class*="language-"] {
     margin-right: -1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    position: relative;
 }
 pre > code {
     display: block;
@@ -172,7 +173,7 @@ pre > code {
         margin-right: -4rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
-        border-radius: 4px;
+        border-radius: 5px;
     }
 
     pre>code {
@@ -742,4 +743,20 @@ thead {
     .post {
         scroll-behavior: auto;
     }
+}
+
+button.copy-button{
+    border: 0;
+    padding: 0.3rem 1rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #000;
+    color: #fff;
+    font-size: .8rem;
+    border-bottom-left-radius: 6px;
+    opacity: .5;
+}
+button.copy-button:hover{
+    opacity: 1;
 }
